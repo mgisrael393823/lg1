@@ -18,6 +18,7 @@ interface ActivityItem {
 
 interface ActivityFeedProps {
   activities?: ActivityItem[];
+  preview?: boolean;
 }
 
 const defaultActivities: ActivityItem[] = [
@@ -94,7 +95,10 @@ const getPriorityColor = (priority: ActivityItem["priority"]) => {
 
 const ActivityFeed = ({
   activities = defaultActivities,
+  preview = false,
 }: ActivityFeedProps) => {
+  const displayActivities = preview ? activities.slice(0, 3) : activities;
+
   return (
     <Card className="w-full bg-white p-3 h-[300px]">
       <div className="flex items-center justify-between mb-2">
@@ -106,7 +110,7 @@ const ActivityFeed = ({
 
       <ScrollArea className="h-[calc(100%-4rem)] pr-2 sm:pr-4">
         <div className="space-y-4">
-          {activities.map((activity) => (
+          {displayActivities.map((activity) => (
             <div
               key={activity.id}
               className="flex items-start space-x-4 p-3 rounded-lg hover:bg-gray-50 transition-colors"
@@ -123,9 +127,15 @@ const ActivityFeed = ({
                   </span>
                 </div>
                 <p className="text-sm text-gray-600">{activity.description}</p>
-                <Badge variant="outline" className="text-xs">
-                  {activity.platform}
-                </Badge>
+                <div className="flex items-center gap-2">
+                  <SourceBadge source={activity.platform} className="text-xs" />
+                  <Badge
+                    variant="secondary"
+                    className={`text-xs ${getPriorityColor(activity.priority)}`}
+                  >
+                    {activity.priority}
+                  </Badge>
+                </div>
               </div>
             </div>
           ))}

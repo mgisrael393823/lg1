@@ -32,12 +32,16 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
   userAvatar = "https://api.dicebear.com/7.x/avataaars/svg?seed=John",
 }) => {
   return (
-    <header className="w-full h-16 bg-white border-b border-gray-200 px-2 sm:px-4 flex items-center justify-between fixed top-0 z-50 left-0">
+    <header className="w-full h-14 sm:h-16 bg-white border-b border-gray-200 px-2 sm:px-4 flex items-center justify-between fixed top-0 z-50 left-0">
       <div className="flex items-center gap-4">
-        <img src="/lg-logo.svg" alt="LG Design Logo" className="h-12 grow" />
+        <img
+          src="https://lg-group.com/wp-content/uploads/2021/12/LG-Design-Logo_Black-e1640047593286-300x157.png"
+          alt="LG Design Logo"
+          className="h-8 sm:h-12 grow object-contain"
+        />
       </div>
       {/* Search Section */}
-      <div className="flex-1 max-w-xl">
+      <div className="flex-1 max-w-xl hidden sm:block">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
           <Input
@@ -48,7 +52,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
         </div>
       </div>
       {/* Actions Section */}
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center space-x-2 sm:space-x-4">
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>

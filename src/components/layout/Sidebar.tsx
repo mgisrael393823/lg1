@@ -1,6 +1,7 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { Link, useLocation } from "react-router-dom";
 import {
   LayoutDashboard,
   FolderKanban,
@@ -11,6 +12,8 @@ import {
   ChevronLeft,
   ChevronRight,
   Menu,
+  BarChart3,
+  FileText,
 } from "lucide-react";
 import {
   Tooltip,
@@ -25,8 +28,6 @@ interface SidebarProps {
   onToggle?: () => void;
 }
 
-import { BarChart3, FileText } from "lucide-react";
-
 const menuItems = [
   { icon: LayoutDashboard, label: "Dashboard", href: "/" },
   { icon: FolderKanban, label: "Projects", href: "/projects" },
@@ -40,34 +41,45 @@ const menuItems = [
 
 export function Sidebar({ collapsed = false, onToggle }: SidebarProps) {
   const [isMobileOpen, setIsMobileOpen] = React.useState(false);
+  const location = useLocation();
 
   const SidebarContent = () => (
-    <div className="flex flex-col h-full p-4">
+    <div className="flex flex-col h-full p-1">
       <div className="flex-1">
-        {menuItems.map((item) => (
-          <TooltipProvider key={item.label}>
-            <Tooltip delayDuration={0}>
-              <TooltipTrigger asChild>
-                <Button
-                  variant="ghost"
-                  className={cn(
-                    "w-full flex items-center justify-start mb-2",
-                    collapsed ? "justify-center" : "justify-start",
-                  )}
-                  onClick={() => (window.location.href = item.href)}
-                >
-                  <item.icon className="h-5 w-5" />
-                  {!collapsed && <span className="ml-3">{item.label}</span>}
-                </Button>
-              </TooltipTrigger>
-              {collapsed && (
-                <TooltipContent side="right">
-                  <p>{item.label}</p>
-                </TooltipContent>
-              )}
-            </Tooltip>
-          </TooltipProvider>
-        ))}
+        {menuItems.map((item) => {
+          const isActive = location.pathname === item.href;
+          return (
+            <TooltipProvider key={item.label}>
+              <Tooltip delayDuration={0}>
+                <TooltipTrigger asChild>
+                  <Link to={item.href} className="w-full">
+                    <Button
+                      variant={isActive ? "secondary" : "ghost"}
+                      className={cn(
+                        "w-full flex items-center justify-start h-10 min-h-0 py-0",
+                        collapsed
+                          ? "justify-center px-2"
+                          : "justify-start px-2",
+                      )}
+                    >
+                      <item.icon className="h-5 w-5" />
+                      {!collapsed && (
+                        <span className="ml-2 text-base font-medium">
+                          {item.label}
+                        </span>
+                      )}
+                    </Button>
+                  </Link>
+                </TooltipTrigger>
+                {collapsed && (
+                  <TooltipContent side="right">
+                    <p>{item.label}</p>
+                  </TooltipContent>
+                )}
+              </Tooltip>
+            </TooltipProvider>
+          );
+        })}
       </div>
       <Button
         variant="ghost"
@@ -107,7 +119,7 @@ export function Sidebar({ collapsed = false, onToggle }: SidebarProps) {
       <div
         className={cn(
           "fixed left-0 top-16 h-[calc(100vh-4rem)] bg-white border-r transition-all duration-300 z-40",
-          collapsed ? "w-16" : "w-64",
+          collapsed ? "w-12" : "w-56",
           "hidden lg:block",
         )}
       >

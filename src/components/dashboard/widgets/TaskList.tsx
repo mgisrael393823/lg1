@@ -2,6 +2,7 @@ import React from "react";
 import { Card } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
+import { SourceBadge } from "@/components/ui/source-badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Clock, Calendar, AlertCircle } from "lucide-react";
 
@@ -100,9 +101,7 @@ const TaskList = ({
                   >
                     {task.priority}
                   </Badge>
-                  <Badge variant="outline" className="text-xs">
-                    {task.platform}
-                  </Badge>
+                  <SourceBadge source={task.platform} className="text-xs" />
                 </div>
               </div>
             </div>
