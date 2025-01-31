@@ -1,4 +1,5 @@
-import { Badge } from "./badge";
+import React from "react";
+import { Badge } from "@/components/ui/badge";
 import { getAppColors } from "@/lib/app-colors";
 import type { AppName } from "@/lib/app-colors";
 
@@ -7,15 +8,12 @@ interface SourceBadgeProps {
   className?: string;
 }
 
-export function SourceBadge({ source, className = "" }: SourceBadgeProps) {
-  const colors = getAppColors(source);
+export const SourceBadge = ({ source, className = "" }: SourceBadgeProps) => {
+  const { background, text } = getAppColors(source);
 
   return (
-    <Badge
-      variant="secondary"
-      className={`${colors.background} ${colors.text} ${className}`}
-    >
+    <Badge variant="secondary" className={`${background} ${text} ${className}`}>
       {source}
     </Badge>
   );
-}
+};

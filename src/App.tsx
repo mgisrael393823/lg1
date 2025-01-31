@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { Routes, Route, useRoutes } from "react-router-dom";
+import routes from "tempo-routes";
 import AppLayout from "./components/layout/AppLayout";
 import Home from "./components/home";
 import Projects from "./pages/projects";
@@ -11,16 +12,8 @@ import Analytics from "./pages/analytics";
 import Documents from "./pages/documents";
 import MicrosoftTeams from "./pages/platforms/microsoft-teams";
 import ShareFile from "./pages/platforms/sharefile";
-import routes from "tempo-routes";
 
 function App() {
-  // Initialize Tempo routes if in Tempo environment
-  const tempoRoutes =
-    import.meta.env.VITE_TEMPO === "true" ? useRoutes(routes) : null;
-
-  // Get the base path from environment
-  const basePath = import.meta.env.BASE_URL || "/";
-
   return (
     <Suspense
       fallback={
@@ -30,32 +23,22 @@ function App() {
       }
     >
       <AppLayout>
-        {/* Render Tempo routes first if they exist */}
-        {tempoRoutes}
-
+        {import.meta.env.VITE_TEMPO && useRoutes(routes)}
         <Routes>
-          <Route path={basePath} element={<Home />} />
-          <Route path={`${basePath}projects`} element={<Projects />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/communication" element={<Communications />} />
+          <Route path="/notifications" element={<Notifications />} />
+          <Route path="/integrations" element={<Integrations />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/analytics" element={<Analytics />} />
+          <Route path="/documents" element={<Documents />} />
           <Route
-            path={`${basePath}communication`}
-            element={<Communications />}
-          />
-          <Route
-            path={`${basePath}notifications`}
-            element={<Notifications />}
-          />
-          <Route path={`${basePath}integrations`} element={<Integrations />} />
-          <Route path={`${basePath}settings`} element={<Settings />} />
-          <Route path={`${basePath}analytics`} element={<Analytics />} />
-          <Route path={`${basePath}documents`} element={<Documents />} />
-          <Route
-            path={`${basePath}platforms/microsoft-teams`}
+            path="/platforms/microsoft-teams"
             element={<MicrosoftTeams />}
           />
-          <Route
-            path={`${basePath}platforms/sharefile`}
-            element={<ShareFile />}
-          />
+          <Route path="/platforms/sharefile" element={<ShareFile />} />
+          {import.meta.env.VITE_TEMPO && <Route path="/tempobook/*" />}
           <Route path="*" element={<Home />} />
         </Routes>
       </AppLayout>

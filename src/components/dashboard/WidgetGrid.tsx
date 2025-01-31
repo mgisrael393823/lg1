@@ -5,10 +5,13 @@ import ProjectTimeline from "./widgets/ProjectTimeline";
 import TaskList from "./widgets/TaskList";
 import FinancialSnapshot from "./widgets/FinancialSnapshot";
 
+import type { AppName } from "@/lib/app-colors";
+import { APP_NAMES } from "@/lib/app-colors";
+
 interface Widget {
   id: string;
   type: "activity" | "timeline" | "tasks" | "financial";
-  source: string;
+  source: AppName;
   x: number;
   y: number;
   w: number;
@@ -23,7 +26,7 @@ const defaultWidgets: Widget[] = [
   {
     id: "1",
     type: "activity",
-    source: "Microsoft Teams",
+    source: APP_NAMES.MICROSOFT_TEAMS,
     x: 0,
     y: 0,
     w: 4,
@@ -32,7 +35,7 @@ const defaultWidgets: Widget[] = [
   {
     id: "2",
     type: "tasks",
-    source: "Procore",
+    source: APP_NAMES.PROCORE,
     x: 4,
     y: 0,
     w: 4,
@@ -41,7 +44,7 @@ const defaultWidgets: Widget[] = [
   {
     id: "3",
     type: "financial",
-    source: "Northspyre",
+    source: APP_NAMES.NORTHSPYRE,
     x: 8,
     y: 0,
     w: 4,
@@ -50,13 +53,13 @@ const defaultWidgets: Widget[] = [
   {
     id: "4",
     type: "timeline",
-    source: "Procore",
+    source: APP_NAMES.PROCORE,
     x: 0,
     y: 4,
     w: 12,
     h: 4,
   },
-];
+] as const;
 
 const WidgetGrid = ({ widgets = defaultWidgets }: WidgetGridProps) => {
   const renderWidget = (widget: Widget) => {

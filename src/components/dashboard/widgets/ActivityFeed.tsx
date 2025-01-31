@@ -6,13 +6,16 @@ import { Badge } from "@/components/ui/badge";
 import { SourceBadge } from "@/components/ui/source-badge";
 import { Bell, Calendar, FileText, MessageSquare } from "lucide-react";
 
+import type { AppName } from "@/lib/app-colors";
+import { APP_NAMES } from "@/lib/app-colors";
+
 interface ActivityItem {
   id: string;
   type: "notification" | "calendar" | "document" | "message";
   title: string;
   description: string;
   timestamp: string;
-  platform: string;
+  platform: AppName;
   priority: "low" | "medium" | "high";
 }
 
@@ -28,7 +31,7 @@ const defaultActivities: ActivityItem[] = [
     title: "Teams Chat",
     description: "New messages in Project Discussion channel",
     timestamp: "1 hour ago",
-    platform: "Microsoft Teams",
+    platform: APP_NAMES.MICROSOFT_TEAMS,
     priority: "high",
   },
   {
@@ -37,7 +40,7 @@ const defaultActivities: ActivityItem[] = [
     title: "Document Update",
     description: "Budget spreadsheet modified in Office 365",
     timestamp: "2 hours ago",
-    platform: "Office 365",
+    platform: APP_NAMES.OFFICE_365,
     priority: "medium",
   },
   {
@@ -46,7 +49,7 @@ const defaultActivities: ActivityItem[] = [
     title: "File Shared",
     description: "Site photos uploaded to ShareFile",
     timestamp: "3 hours ago",
-    platform: "ShareFile",
+    platform: APP_NAMES.SHAREFILE,
     priority: "low",
   },
   {
@@ -55,7 +58,7 @@ const defaultActivities: ActivityItem[] = [
     title: "List Updated",
     description: "Equipment inventory list modified",
     timestamp: "4 hours ago",
-    platform: "Microsoft Lists",
+    platform: APP_NAMES.MICROSOFT_LISTS,
     priority: "medium",
   },
   {
@@ -64,7 +67,7 @@ const defaultActivities: ActivityItem[] = [
     title: "Files Synced",
     description: "Project documents synced to OneDrive",
     timestamp: "5 hours ago",
-    platform: "OneDrive",
+    platform: APP_NAMES.ONEDRIVE,
     priority: "low",
   },
 ];

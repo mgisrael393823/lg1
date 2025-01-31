@@ -12,6 +12,9 @@ import {
   Grid,
   List,
   MoreVertical,
+  Users,
+  Clock,
+  Star,
 } from "lucide-react";
 
 interface File {

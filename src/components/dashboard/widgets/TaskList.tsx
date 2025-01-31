@@ -6,13 +6,16 @@ import { SourceBadge } from "@/components/ui/source-badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Clock, Calendar, AlertCircle } from "lucide-react";
 
+import type { AppName } from "@/lib/app-colors";
+import { APP_NAMES } from "@/lib/app-colors";
+
 interface Task {
   id: string;
   title: string;
   dueDate: string;
   priority: "high" | "medium" | "low";
   completed: boolean;
-  platform: string;
+  platform: AppName;
 }
 
 interface TaskListProps {
@@ -27,7 +30,7 @@ const defaultTasks: Task[] = [
     dueDate: "2024-03-25",
     priority: "high",
     completed: false,
-    platform: "Northspyre",
+    platform: APP_NAMES.NORTHSPYRE,
   },
   {
     id: "2",
@@ -35,7 +38,7 @@ const defaultTasks: Task[] = [
     dueDate: "2024-03-26",
     priority: "medium",
     completed: true,
-    platform: "Procore",
+    platform: APP_NAMES.PROCORE,
   },
   {
     id: "3",
@@ -43,7 +46,7 @@ const defaultTasks: Task[] = [
     dueDate: "2024-03-27",
     priority: "high",
     completed: false,
-    platform: "Sage",
+    platform: APP_NAMES.SAGE,
   },
 ];
 

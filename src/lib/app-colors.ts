@@ -9,6 +9,18 @@ export type AppName =
   | "Microsoft Lists"
   | "HubSpot";
 
+export const APP_NAMES = {
+  NORTHSPYRE: "Northspyre" as AppName,
+  PROCORE: "Procore" as AppName,
+  SAGE: "Sage" as AppName,
+  MICROSOFT_TEAMS: "Microsoft Teams" as AppName,
+  SHAREFILE: "ShareFile" as AppName,
+  OFFICE_365: "Office 365" as AppName,
+  ONEDRIVE: "OneDrive" as AppName,
+  MICROSOFT_LISTS: "Microsoft Lists" as AppName,
+  HUBSPOT: "HubSpot" as AppName,
+} as const;
+
 type AppColor = {
   background: string;
   text: string;
